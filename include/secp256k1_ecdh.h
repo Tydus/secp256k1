@@ -24,6 +24,26 @@ SECP256K1_API SECP256K1_WARN_UNUSED_RESULT int secp256k1_ecdh(
   const unsigned char *privkey
 ) SECP256K1_ARG_NONNULL(1) SECP256K1_ARG_NONNULL(2) SECP256K1_ARG_NONNULL(3) SECP256K1_ARG_NONNULL(4);
 
+/** Compute an EC Diffie-Hellman raw point in constant time
+ *  Returns: 1: exponentiation was successful
+ *           0: scalar was invalid (zero or overflow)
+ *  Args:    ctx:        pointer to a context object (cannot be NULL)
+ *  Out:     result_x:   a 32-byte array which will be populated by the X
+ *                       coordinate of the resulting point
+ *  Out:     result_y:   a 32-byte array which will be populated by the Y
+ *                       coordinate of the resulting point
+ *  In:      pubkey:     a pointer to a secp256k1_pubkey containing an
+ *                       initialized public key
+ *           privkey:    a 32-byte scalar with which to multiply the point
+ */
+SECP256K1_API SECP256K1_WARN_UNUSED_RESULT int secp256k1_ecdh_raw(
+  const secp256k1_context* ctx,
+  unsigned char *result_x,
+  unsigned char *result_y,
+  const secp256k1_pubkey *pubkey,
+  const unsigned char *privkey
+) SECP256K1_ARG_NONNULL(1) SECP256K1_ARG_NONNULL(2) SECP256K1_ARG_NONNULL(3) SECP256K1_ARG_NONNULL(4) SECP256K1_ARG_NONNULL(5);
+
 #ifdef __cplusplus
 }
 #endif
